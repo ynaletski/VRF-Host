@@ -110,11 +110,22 @@ namespace readEXEfile
             {
                 threadForCycleRead.Abort();
                 Thread.Sleep(100);
+                try
+                {
+                    sendComText("/r");
+                    Thread.Sleep(100);
+                    _serialComport.Close();
+                }
+                catch
+                {
+                    sendTextToResponseTextBox("Проверте физическое наличие порта");
+                }
             }
-            _serialComport.Close();
             sendTextToResponseTextBox("Порт закрыт:  " + (_serialComport.PortName));
             //this.Close(); //закрывает программу
         }
+
+
 
         private void applyButton_Click(object sender, EventArgs e)
         {
@@ -162,6 +173,7 @@ namespace readEXEfile
             catch
             {
                 sendTextToResponseTextBox("Ошибка чтения");
+                prohibitionCycleRead = DISABLE;
             }
         }
 

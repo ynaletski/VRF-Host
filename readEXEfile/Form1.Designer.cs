@@ -403,9 +403,9 @@
             this.dataBitsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dataBitsLabel.Location = new System.Drawing.Point(14, 306);
             this.dataBitsLabel.Name = "dataBitsLabel";
-            this.dataBitsLabel.Size = new System.Drawing.Size(62, 16);
+            this.dataBitsLabel.Size = new System.Drawing.Size(82, 16);
             this.dataBitsLabel.TabIndex = 4;
-            this.dataBitsLabel.Text = "Data Bits";
+            this.dataBitsLabel.Text = "Бит данных";
             // 
             // stopBitsLabel
             // 
@@ -413,9 +413,9 @@
             this.stopBitsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.stopBitsLabel.Location = new System.Drawing.Point(14, 228);
             this.stopBitsLabel.Name = "stopBitsLabel";
-            this.stopBitsLabel.Size = new System.Drawing.Size(61, 16);
+            this.stopBitsLabel.Size = new System.Drawing.Size(67, 16);
             this.stopBitsLabel.TabIndex = 3;
-            this.stopBitsLabel.Text = "Stop Bits";
+            this.stopBitsLabel.Text = "Стоп Бит";
             // 
             // parityLabel
             // 
@@ -423,9 +423,9 @@
             this.parityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.parityLabel.Location = new System.Drawing.Point(14, 149);
             this.parityLabel.Name = "parityLabel";
-            this.parityLabel.Size = new System.Drawing.Size(42, 16);
+            this.parityLabel.Size = new System.Drawing.Size(69, 16);
             this.parityLabel.TabIndex = 2;
-            this.parityLabel.Text = "Parity";
+            this.parityLabel.Text = "Четность";
             // 
             // baudRateLabel
             // 
@@ -433,9 +433,9 @@
             this.baudRateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.baudRateLabel.Location = new System.Drawing.Point(14, 81);
             this.baudRateLabel.Name = "baudRateLabel";
-            this.baudRateLabel.Size = new System.Drawing.Size(72, 16);
+            this.baudRateLabel.Size = new System.Drawing.Size(69, 16);
             this.baudRateLabel.TabIndex = 1;
-            this.baudRateLabel.Text = "Baud Rate";
+            this.baudRateLabel.Text = "Скорость";
             // 
             // portLabel
             // 
@@ -443,9 +443,9 @@
             this.portLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.portLabel.Location = new System.Drawing.Point(14, 20);
             this.portLabel.Name = "portLabel";
-            this.portLabel.Size = new System.Drawing.Size(32, 16);
+            this.portLabel.Size = new System.Drawing.Size(41, 16);
             this.portLabel.TabIndex = 0;
-            this.portLabel.Text = "Port";
+            this.portLabel.Text = "Порт";
             // 
             // optionsLabel
             // 
@@ -526,8 +526,8 @@
             this.calibrationTableDataGridView.Size = new System.Drawing.Size(259, 243);
             this.calibrationTableDataGridView.TabIndex = 26;
             this.calibrationTableDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.CalibrationTableDataGridView_EditControlShowing);
-            this.calibrationTableDataGridView.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.calibrationTableDataGridView_UserDeletedRow);
             this.calibrationTableDataGridView.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.calibrationTableDataGridView_UserAddedRow);
+            this.calibrationTableDataGridView.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.calibrationTableDataGridView_UserDeletedRow);
             // 
             // length
             // 
@@ -768,7 +768,7 @@
             this.Location = new System.Drawing.Point(100, 100);
             this.Name = "Form1";
             this.StartPosition = global::readEXEfile.Properties.Settings.Default.center;
-            this.Text = "VRFHost";
+            this.Text = "VRFHost (Факом технолоджиз)";
             this.buttonsAndDataTypePanel.ResumeLayout(false);
             this.buttonsAndDataTypePanel.PerformLayout();
             this.dataTypePanel.ResumeLayout(false);
