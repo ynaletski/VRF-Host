@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="readEXEfile.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="q" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">349, 21</Value>
+    </Setting>
+    <Setting Name="qw" Type="System.Drawing.Size" Scope="Application">
+      <Value Profile="(Default)">349, 21</Value>
+    </Setting>
+    <Setting Name="asd" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">10, 10</Value>
+    </Setting>
+    <Setting Name="dsa" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">100, 100</Value>
+    </Setting>
+    <Setting Name="center" Type="System.Windows.Forms.FormStartPosition" Scope="User">
+      <Value Profile="(Default)">CenterScreen</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
