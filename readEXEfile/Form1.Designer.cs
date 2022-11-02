@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openCom = new System.Windows.Forms.Button();
             this.closeCom = new System.Windows.Forms.Button();
             this.buttonsAndDataTypePanel = new System.Windows.Forms.Panel();
@@ -531,8 +531,8 @@
             // 
             // length
             // 
-            dataGridViewCellStyle2.NullValue = null;
-            this.length.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.NullValue = null;
+            this.length.DefaultCellStyle = dataGridViewCellStyle3;
             this.length.HeaderText = "Уровень";
             this.length.Name = "length";
             // 
@@ -757,6 +757,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1323, 625);
             this.Controls.Add(this.inputTableLabel);
             this.Controls.Add(this.inputTypePanel);

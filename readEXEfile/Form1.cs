@@ -365,8 +365,19 @@ namespace readEXEfile
                     {
                         calibrationTableDataGridView.Rows.Add();
                         string[] str = line.Split();
-                        calibrationTableDataGridView.Rows[count].Cells[0].Value = float.Parse(str[0].Replace(".", ","));
-                        calibrationTableDataGridView.Rows[count].Cells[1].Value = float.Parse(str[1].Replace(".", ","));
+
+                        if (System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0] == '.')
+                        {
+                            calibrationTableDataGridView.Rows[count].Cells[0].Value = float.Parse(str[0].Replace(",", "."));
+                            calibrationTableDataGridView.Rows[count].Cells[1].Value = float.Parse(str[1].Replace(",", "."));
+                        }
+                        else if (System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0] == ',')
+                        {
+                            calibrationTableDataGridView.Rows[count].Cells[0].Value = float.Parse(str[0].Replace(".", ","));
+                            calibrationTableDataGridView.Rows[count].Cells[1].Value = float.Parse(str[1].Replace(".", ","));
+                        }
+                        //calibrationTableDataGridView.Rows[count].Cells[0].Value = float.Parse(str[0]);
+                        //calibrationTableDataGridView.Rows[count].Cells[1].Value = float.Parse(str[1]);
                         count++;
                     }
                 }
@@ -487,11 +498,24 @@ namespace readEXEfile
 
         private void Tb_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(Char.IsDigit(e.KeyChar)) && (e.KeyChar != ','))
+            if (System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0] == '.')
             {
-                if (e.KeyChar != (char)Keys.Back)
-                { 
-                    e.Handled = true;     
+                if (!(Char.IsDigit(e.KeyChar)) && (e.KeyChar != '.'))
+                {
+                    if (e.KeyChar != (char)Keys.Back)
+                    {
+                        e.Handled = true;
+                    }
+                }
+            }
+            else if (System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0] == ',')
+            {
+                if (!(Char.IsDigit(e.KeyChar)) && (e.KeyChar != ','))
+                {
+                    if (e.KeyChar != (char)Keys.Back)
+                    {
+                        e.Handled = true;
+                    }
                 }
             }
         }
