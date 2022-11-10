@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.openCom = new System.Windows.Forms.Button();
-            this.closeCom = new System.Windows.Forms.Button();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonsAndDataTypePanel = new System.Windows.Forms.Panel();
             this.sizeButton = new System.Windows.Forms.Button();
             this.exeSaveButton = new System.Windows.Forms.Button();
@@ -40,22 +38,6 @@
             this.dataTypePanel = new System.Windows.Forms.Panel();
             this.textDataTypeRadioButton = new System.Windows.Forms.RadioButton();
             this.hexDataTypeRadioButton = new System.Windows.Forms.RadioButton();
-            this.applyButton = new System.Windows.Forms.Button();
-            this.serialPortCommunicationAndOptionsSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.readProgressBar = new System.Windows.Forms.ProgressBar();
-            this.requestTextBox = new System.Windows.Forms.TextBox();
-            this.sendButton = new System.Windows.Forms.Button();
-            this.responseTextBox = new System.Windows.Forms.TextBox();
-            this.dataBitsComboBox = new System.Windows.Forms.ComboBox();
-            this.stopBitsComboBox = new System.Windows.Forms.ComboBox();
-            this.parityComboBox = new System.Windows.Forms.ComboBox();
-            this.baudRateComboBox = new System.Windows.Forms.ComboBox();
-            this.numbComPortComboBox = new System.Windows.Forms.ComboBox();
-            this.dataBitsLabel = new System.Windows.Forms.Label();
-            this.stopBitsLabel = new System.Windows.Forms.Label();
-            this.parityLabel = new System.Windows.Forms.Label();
-            this.baudRateLabel = new System.Windows.Forms.Label();
-            this.portLabel = new System.Windows.Forms.Label();
             this.optionsLabel = new System.Windows.Forms.Label();
             this.serialPortCommunicationLabel = new System.Windows.Forms.Label();
             this.inputTypePanel = new System.Windows.Forms.Panel();
@@ -84,49 +66,40 @@
             this.forWriteInControllerOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.forCreateTableOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveTableFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.portLabel = new System.Windows.Forms.Label();
+            this.baudRateLabel = new System.Windows.Forms.Label();
+            this.parityLabel = new System.Windows.Forms.Label();
+            this.stopBitsLabel = new System.Windows.Forms.Label();
+            this.closeCom = new System.Windows.Forms.Button();
+            this.dataBitsLabel = new System.Windows.Forms.Label();
+            this.openCom = new System.Windows.Forms.Button();
+            this.numbComPortComboBox = new System.Windows.Forms.ComboBox();
+            this.baudRateComboBox = new System.Windows.Forms.ComboBox();
+            this.parityComboBox = new System.Windows.Forms.ComboBox();
+            this.stopBitsComboBox = new System.Windows.Forms.ComboBox();
+            this.dataBitsComboBox = new System.Windows.Forms.ComboBox();
+            this.applyButton = new System.Windows.Forms.Button();
+            this.responseTextBox = new System.Windows.Forms.TextBox();
+            this.sendButton = new System.Windows.Forms.Button();
+            this.requestTextBox = new System.Windows.Forms.TextBox();
+            this.readProgressBar = new System.Windows.Forms.ProgressBar();
+            this.serialPortCommunicationAndOptionsSplitContainer = new System.Windows.Forms.SplitContainer();
             this.buttonsAndDataTypePanel.SuspendLayout();
             this.dataTypePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.serialPortCommunicationAndOptionsSplitContainer)).BeginInit();
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.SuspendLayout();
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.SuspendLayout();
-            this.serialPortCommunicationAndOptionsSplitContainer.SuspendLayout();
             this.inputTypePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.calibrationTableDataGridView)).BeginInit();
             this.numberOfTankPanel.SuspendLayout();
             this.countOfStringsPanel.SuspendLayout();
             this.unitsOfLengthPanel.SuspendLayout();
             this.unitsOfVolumePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.serialPortCommunicationAndOptionsSplitContainer)).BeginInit();
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.SuspendLayout();
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.SuspendLayout();
+            this.serialPortCommunicationAndOptionsSplitContainer.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // openCom
-            // 
-            this.openCom.BackColor = System.Drawing.Color.DarkGray;
-            this.openCom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.openCom.FlatAppearance.BorderSize = 0;
-            this.openCom.Location = new System.Drawing.Point(6, 439);
-            this.openCom.Name = "openCom";
-            this.openCom.Size = new System.Drawing.Size(105, 38);
-            this.openCom.TabIndex = 0;
-            this.openCom.Text = "Открыть Порт";
-            this.openCom.UseVisualStyleBackColor = false;
-            this.openCom.Click += new System.EventHandler(this.openComButton_Click);
-            // 
-            // closeCom
-            // 
-            this.closeCom.BackColor = System.Drawing.Color.DarkGray;
-            this.closeCom.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.closeCom.FlatAppearance.BorderSize = 0;
-            this.closeCom.Location = new System.Drawing.Point(117, 439);
-            this.closeCom.Name = "closeCom";
-            this.closeCom.Size = new System.Drawing.Size(110, 38);
-            this.closeCom.TabIndex = 1;
-            this.closeCom.Text = "Закрыть Порт";
-            this.closeCom.UseVisualStyleBackColor = false;
-            this.closeCom.Click += new System.EventHandler(this.closeComButton_Click);
             // 
             // buttonsAndDataTypePanel
             // 
-            this.buttonsAndDataTypePanel.AutoSize = true;
             this.buttonsAndDataTypePanel.BackColor = System.Drawing.Color.Silver;
             this.buttonsAndDataTypePanel.Controls.Add(this.sizeButton);
             this.buttonsAndDataTypePanel.Controls.Add(this.exeSaveButton);
@@ -134,11 +107,12 @@
             this.buttonsAndDataTypePanel.Controls.Add(this.dataTypeLabel);
             this.buttonsAndDataTypePanel.Controls.Add(this.clearScrinButton);
             this.buttonsAndDataTypePanel.Controls.Add(this.dataTypePanel);
-            this.buttonsAndDataTypePanel.Location = new System.Drawing.Point(283, 550);
+            this.buttonsAndDataTypePanel.Location = new System.Drawing.Point(273, 12);
             this.buttonsAndDataTypePanel.Name = "buttonsAndDataTypePanel";
             this.buttonsAndDataTypePanel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.buttonsAndDataTypePanel.Size = new System.Drawing.Size(1033, 63);
             this.buttonsAndDataTypePanel.TabIndex = 2;
+            this.buttonsAndDataTypePanel.Visible = false;
             // 
             // sizeButton
             // 
@@ -151,6 +125,7 @@
             this.sizeButton.TabIndex = 9;
             this.sizeButton.Text = "Узнать размер файла";
             this.sizeButton.UseVisualStyleBackColor = false;
+            this.sizeButton.Visible = false;
             this.sizeButton.Click += new System.EventHandler(this.sizeButton_Click);
             // 
             // exeSaveButton
@@ -164,6 +139,7 @@
             this.exeSaveButton.TabIndex = 8;
             this.exeSaveButton.Text = "Сохранить скачанный файл";
             this.exeSaveButton.UseVisualStyleBackColor = false;
+            this.exeSaveButton.Visible = false;
             this.exeSaveButton.Click += new System.EventHandler(this.exeSaveButton_Click);
             // 
             // readComButton
@@ -177,6 +153,7 @@
             this.readComButton.TabIndex = 6;
             this.readComButton.Text = "Скачать исполняемый файл";
             this.readComButton.UseVisualStyleBackColor = false;
+            this.readComButton.Visible = false;
             this.readComButton.Click += new System.EventHandler(this.readComButton_Click);
             // 
             // dataTypeLabel
@@ -239,221 +216,13 @@
             this.hexDataTypeRadioButton.Text = "Hex";
             this.hexDataTypeRadioButton.UseVisualStyleBackColor = true;
             // 
-            // applyButton
-            // 
-            this.applyButton.BackColor = System.Drawing.Color.DarkGray;
-            this.applyButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.applyButton.FlatAppearance.BorderSize = 0;
-            this.applyButton.Location = new System.Drawing.Point(55, 376);
-            this.applyButton.Name = "applyButton";
-            this.applyButton.Size = new System.Drawing.Size(114, 38);
-            this.applyButton.TabIndex = 2;
-            this.applyButton.Text = "Применить";
-            this.applyButton.UseVisualStyleBackColor = false;
-            this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
-            // 
-            // serialPortCommunicationAndOptionsSplitContainer
-            // 
-            this.serialPortCommunicationAndOptionsSplitContainer.Location = new System.Drawing.Point(283, 29);
-            this.serialPortCommunicationAndOptionsSplitContainer.Name = "serialPortCommunicationAndOptionsSplitContainer";
-            // 
-            // serialPortCommunicationAndOptionsSplitContainer.Panel1
-            // 
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.BackColor = System.Drawing.Color.Silver;
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.Controls.Add(this.readProgressBar);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.Controls.Add(this.requestTextBox);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.Controls.Add(this.sendButton);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.Controls.Add(this.responseTextBox);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            // 
-            // serialPortCommunicationAndOptionsSplitContainer.Panel2
-            // 
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.BackColor = System.Drawing.Color.Silver;
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.applyButton);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.dataBitsComboBox);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.stopBitsComboBox);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.parityComboBox);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.baudRateComboBox);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.numbComPortComboBox);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.openCom);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.dataBitsLabel);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.closeCom);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.stopBitsLabel);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.parityLabel);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.baudRateLabel);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.portLabel);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.ForeColor = System.Drawing.Color.Black;
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Margin = new System.Windows.Forms.Padding(3);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Padding = new System.Windows.Forms.Padding(3);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.serialPortCommunicationAndOptionsSplitContainer.Size = new System.Drawing.Size(1033, 515);
-            this.serialPortCommunicationAndOptionsSplitContainer.SplitterDistance = 795;
-            this.serialPortCommunicationAndOptionsSplitContainer.TabIndex = 3;
-            // 
-            // readProgressBar
-            // 
-            this.readProgressBar.Location = new System.Drawing.Point(143, 179);
-            this.readProgressBar.Name = "readProgressBar";
-            this.readProgressBar.Size = new System.Drawing.Size(487, 23);
-            this.readProgressBar.TabIndex = 6;
-            // 
-            // requestTextBox
-            // 
-            this.requestTextBox.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.requestTextBox.Location = new System.Drawing.Point(16, 463);
-            this.requestTextBox.Multiline = true;
-            this.requestTextBox.Name = "requestTextBox";
-            this.requestTextBox.Size = new System.Drawing.Size(614, 38);
-            this.requestTextBox.TabIndex = 5;
-            this.requestTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.requestTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RequestTextBox_KeyPress);
-            // 
-            // sendButton
-            // 
-            this.sendButton.BackColor = System.Drawing.Color.DarkGray;
-            this.sendButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.sendButton.FlatAppearance.BorderSize = 0;
-            this.sendButton.Location = new System.Drawing.Point(653, 463);
-            this.sendButton.Name = "sendButton";
-            this.sendButton.Size = new System.Drawing.Size(111, 38);
-            this.sendButton.TabIndex = 3;
-            this.sendButton.Text = "Отправить в Порт";
-            this.sendButton.UseVisualStyleBackColor = false;
-            this.sendButton.Click += new System.EventHandler(this.sendButton_Click);
-            // 
-            // responseTextBox
-            // 
-            this.responseTextBox.AllowDrop = true;
-            this.responseTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.responseTextBox.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.responseTextBox.Location = new System.Drawing.Point(16, 12);
-            this.responseTextBox.Multiline = true;
-            this.responseTextBox.Name = "responseTextBox";
-            this.responseTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.responseTextBox.Size = new System.Drawing.Size(748, 445);
-            this.responseTextBox.TabIndex = 0;
-            // 
-            // dataBitsComboBox
-            // 
-            this.dataBitsComboBox.FormattingEnabled = true;
-            this.dataBitsComboBox.Items.AddRange(new object[] {
-            "7",
-            "8"});
-            this.dataBitsComboBox.Location = new System.Drawing.Point(17, 325);
-            this.dataBitsComboBox.Name = "dataBitsComboBox";
-            this.dataBitsComboBox.Size = new System.Drawing.Size(195, 21);
-            this.dataBitsComboBox.TabIndex = 9;
-            // 
-            // stopBitsComboBox
-            // 
-            this.stopBitsComboBox.FormattingEnabled = true;
-            this.stopBitsComboBox.Items.AddRange(new object[] {
-            "1",
-            "2"});
-            this.stopBitsComboBox.Location = new System.Drawing.Point(17, 247);
-            this.stopBitsComboBox.Name = "stopBitsComboBox";
-            this.stopBitsComboBox.Size = new System.Drawing.Size(195, 21);
-            this.stopBitsComboBox.TabIndex = 8;
-            // 
-            // parityComboBox
-            // 
-            this.parityComboBox.FormattingEnabled = true;
-            this.parityComboBox.Items.AddRange(new object[] {
-            "None",
-            "Odd",
-            "Even"});
-            this.parityComboBox.Location = new System.Drawing.Point(17, 168);
-            this.parityComboBox.Name = "parityComboBox";
-            this.parityComboBox.Size = new System.Drawing.Size(195, 21);
-            this.parityComboBox.TabIndex = 7;
-            // 
-            // baudRateComboBox
-            // 
-            this.baudRateComboBox.FormattingEnabled = true;
-            this.baudRateComboBox.Items.AddRange(new object[] {
-            "9600",
-            "19200",
-            "115200"});
-            this.baudRateComboBox.Location = new System.Drawing.Point(17, 100);
-            this.baudRateComboBox.Name = "baudRateComboBox";
-            this.baudRateComboBox.Size = new System.Drawing.Size(195, 21);
-            this.baudRateComboBox.TabIndex = 6;
-            // 
-            // numbComPortComboBox
-            // 
-            this.numbComPortComboBox.FormattingEnabled = true;
-            this.numbComPortComboBox.Items.AddRange(new object[] {
-            "Com1",
-            "Com2",
-            "Com3",
-            "Com4",
-            "Com5",
-            "Com6",
-            "Com7",
-            "Com8",
-            "Com9"});
-            this.numbComPortComboBox.Location = new System.Drawing.Point(17, 39);
-            this.numbComPortComboBox.Name = "numbComPortComboBox";
-            this.numbComPortComboBox.Size = new System.Drawing.Size(195, 21);
-            this.numbComPortComboBox.TabIndex = 5;
-            // 
-            // dataBitsLabel
-            // 
-            this.dataBitsLabel.AutoSize = true;
-            this.dataBitsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dataBitsLabel.Location = new System.Drawing.Point(14, 306);
-            this.dataBitsLabel.Name = "dataBitsLabel";
-            this.dataBitsLabel.Size = new System.Drawing.Size(82, 16);
-            this.dataBitsLabel.TabIndex = 4;
-            this.dataBitsLabel.Text = "Бит данных";
-            // 
-            // stopBitsLabel
-            // 
-            this.stopBitsLabel.AutoSize = true;
-            this.stopBitsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.stopBitsLabel.Location = new System.Drawing.Point(14, 228);
-            this.stopBitsLabel.Name = "stopBitsLabel";
-            this.stopBitsLabel.Size = new System.Drawing.Size(67, 16);
-            this.stopBitsLabel.TabIndex = 3;
-            this.stopBitsLabel.Text = "Стоп Бит";
-            // 
-            // parityLabel
-            // 
-            this.parityLabel.AutoSize = true;
-            this.parityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.parityLabel.Location = new System.Drawing.Point(14, 149);
-            this.parityLabel.Name = "parityLabel";
-            this.parityLabel.Size = new System.Drawing.Size(69, 16);
-            this.parityLabel.TabIndex = 2;
-            this.parityLabel.Text = "Четность";
-            // 
-            // baudRateLabel
-            // 
-            this.baudRateLabel.AutoSize = true;
-            this.baudRateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.baudRateLabel.Location = new System.Drawing.Point(14, 81);
-            this.baudRateLabel.Name = "baudRateLabel";
-            this.baudRateLabel.Size = new System.Drawing.Size(69, 16);
-            this.baudRateLabel.TabIndex = 1;
-            this.baudRateLabel.Text = "Скорость";
-            // 
-            // portLabel
-            // 
-            this.portLabel.AutoSize = true;
-            this.portLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.portLabel.Location = new System.Drawing.Point(14, 20);
-            this.portLabel.Name = "portLabel";
-            this.portLabel.Size = new System.Drawing.Size(41, 16);
-            this.portLabel.TabIndex = 0;
-            this.portLabel.Text = "Порт";
-            // 
             // optionsLabel
             // 
             this.optionsLabel.AutoSize = true;
             this.optionsLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.optionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.optionsLabel.ForeColor = System.Drawing.Color.Black;
-            this.optionsLabel.Location = new System.Drawing.Point(1099, 20);
+            this.optionsLabel.Location = new System.Drawing.Point(1089, 20);
             this.optionsLabel.Name = "optionsLabel";
             this.optionsLabel.Size = new System.Drawing.Size(57, 18);
             this.optionsLabel.TabIndex = 0;
@@ -465,7 +234,7 @@
             this.serialPortCommunicationLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.serialPortCommunicationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.serialPortCommunicationLabel.ForeColor = System.Drawing.Color.Black;
-            this.serialPortCommunicationLabel.Location = new System.Drawing.Point(310, 20);
+            this.serialPortCommunicationLabel.Location = new System.Drawing.Point(300, 20);
             this.serialPortCommunicationLabel.Name = "serialPortCommunicationLabel";
             this.serialPortCommunicationLabel.Size = new System.Drawing.Size(288, 18);
             this.serialPortCommunicationLabel.TabIndex = 4;
@@ -483,9 +252,9 @@
             this.inputTypePanel.Controls.Add(this.unitsOfLengthPanel);
             this.inputTypePanel.Controls.Add(this.unitsOfVolumePanel);
             this.inputTypePanel.Controls.Add(this.tableFromFileButton);
-            this.inputTypePanel.Location = new System.Drawing.Point(12, 29);
+            this.inputTypePanel.Location = new System.Drawing.Point(2, 29);
             this.inputTypePanel.Name = "inputTypePanel";
-            this.inputTypePanel.Size = new System.Drawing.Size(265, 584);
+            this.inputTypePanel.Size = new System.Drawing.Size(265, 515);
             this.inputTypePanel.TabIndex = 5;
             // 
             // saveTableButton
@@ -493,11 +262,11 @@
             this.saveTableButton.BackColor = System.Drawing.Color.DarkGray;
             this.saveTableButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.saveTableButton.FlatAppearance.BorderSize = 0;
-            this.saveTableButton.Location = new System.Drawing.Point(66, 477);
+            this.saveTableButton.Location = new System.Drawing.Point(66, 419);
             this.saveTableButton.Name = "saveTableButton";
-            this.saveTableButton.Size = new System.Drawing.Size(121, 38);
+            this.saveTableButton.Size = new System.Drawing.Size(131, 38);
             this.saveTableButton.TabIndex = 28;
-            this.saveTableButton.Text = "Сохранить файл";
+            this.saveTableButton.Text = "Сохранить файл *.tcb";
             this.saveTableButton.UseVisualStyleBackColor = false;
             this.saveTableButton.Click += new System.EventHandler(this.saveTableButton_Click);
             // 
@@ -506,7 +275,7 @@
             this.openFilForWriteButton.BackColor = System.Drawing.Color.DarkGray;
             this.openFilForWriteButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.openFilForWriteButton.FlatAppearance.BorderSize = 0;
-            this.openFilForWriteButton.Location = new System.Drawing.Point(7, 533);
+            this.openFilForWriteButton.Location = new System.Drawing.Point(13, 463);
             this.openFilForWriteButton.Name = "openFilForWriteButton";
             this.openFilForWriteButton.Size = new System.Drawing.Size(119, 38);
             this.openFilForWriteButton.TabIndex = 27;
@@ -523,7 +292,7 @@
             this.Volume});
             this.calibrationTableDataGridView.Location = new System.Drawing.Point(3, 228);
             this.calibrationTableDataGridView.Name = "calibrationTableDataGridView";
-            this.calibrationTableDataGridView.Size = new System.Drawing.Size(259, 243);
+            this.calibrationTableDataGridView.Size = new System.Drawing.Size(259, 185);
             this.calibrationTableDataGridView.TabIndex = 26;
             this.calibrationTableDataGridView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.CalibrationTableDataGridView_EditControlShowing);
             this.calibrationTableDataGridView.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.calibrationTableDataGridView_UserAddedRow);
@@ -531,8 +300,8 @@
             // 
             // length
             // 
-            dataGridViewCellStyle3.NullValue = null;
-            this.length.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.NullValue = null;
+            this.length.DefaultCellStyle = dataGridViewCellStyle1;
             this.length.HeaderText = "Уровень";
             this.length.Name = "length";
             // 
@@ -587,11 +356,11 @@
             this.writeTableInControllerButton.BackColor = System.Drawing.Color.DarkGray;
             this.writeTableInControllerButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.writeTableInControllerButton.FlatAppearance.BorderSize = 0;
-            this.writeTableInControllerButton.Location = new System.Drawing.Point(132, 533);
+            this.writeTableInControllerButton.Location = new System.Drawing.Point(132, 463);
             this.writeTableInControllerButton.Name = "writeTableInControllerButton";
             this.writeTableInControllerButton.Size = new System.Drawing.Size(121, 38);
             this.writeTableInControllerButton.TabIndex = 10;
-            this.writeTableInControllerButton.Text = "Записать файл";
+            this.writeTableInControllerButton.Text = "Записать файл *.tcb в ВРФ";
             this.writeTableInControllerButton.UseVisualStyleBackColor = false;
             this.writeTableInControllerButton.Click += new System.EventHandler(this.writeTableInControllerButton_Click);
             // 
@@ -725,11 +494,11 @@
             this.tableFromFileButton.BackColor = System.Drawing.Color.DarkGray;
             this.tableFromFileButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tableFromFileButton.FlatAppearance.BorderSize = 0;
-            this.tableFromFileButton.Location = new System.Drawing.Point(36, 17);
+            this.tableFromFileButton.Location = new System.Drawing.Point(27, 17);
             this.tableFromFileButton.Name = "tableFromFileButton";
-            this.tableFromFileButton.Size = new System.Drawing.Size(190, 38);
+            this.tableFromFileButton.Size = new System.Drawing.Size(211, 38);
             this.tableFromFileButton.TabIndex = 10;
-            this.tableFromFileButton.Text = "Сформировать таблицу из файла";
+            this.tableFromFileButton.Text = "Сформировать таблицу из файла *.txt";
             this.tableFromFileButton.UseVisualStyleBackColor = false;
             this.tableFromFileButton.Click += new System.EventHandler(this.tableFromFileButton_Click);
             // 
@@ -739,7 +508,7 @@
             this.inputTableLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.inputTableLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.inputTableLabel.ForeColor = System.Drawing.Color.Black;
-            this.inputTableLabel.Location = new System.Drawing.Point(19, 20);
+            this.inputTableLabel.Location = new System.Drawing.Point(9, 20);
             this.inputTableLabel.Name = "inputTableLabel";
             this.inputTableLabel.Size = new System.Drawing.Size(231, 18);
             this.inputTableLabel.TabIndex = 6;
@@ -753,33 +522,267 @@
             // 
             this.forCreateTableOpenFileDialog.FileName = "forCreateTableOpenFileDialog";
             // 
+            // portLabel
+            // 
+            this.portLabel.AutoSize = true;
+            this.portLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.portLabel.Location = new System.Drawing.Point(14, 20);
+            this.portLabel.Name = "portLabel";
+            this.portLabel.Size = new System.Drawing.Size(41, 16);
+            this.portLabel.TabIndex = 0;
+            this.portLabel.Text = "Порт";
+            // 
+            // baudRateLabel
+            // 
+            this.baudRateLabel.AutoSize = true;
+            this.baudRateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.baudRateLabel.Location = new System.Drawing.Point(14, 63);
+            this.baudRateLabel.Name = "baudRateLabel";
+            this.baudRateLabel.Size = new System.Drawing.Size(69, 16);
+            this.baudRateLabel.TabIndex = 1;
+            this.baudRateLabel.Text = "Скорость";
+            // 
+            // parityLabel
+            // 
+            this.parityLabel.AutoSize = true;
+            this.parityLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.parityLabel.Location = new System.Drawing.Point(14, 107);
+            this.parityLabel.Name = "parityLabel";
+            this.parityLabel.Size = new System.Drawing.Size(69, 16);
+            this.parityLabel.TabIndex = 2;
+            this.parityLabel.Text = "Четность";
+            // 
+            // stopBitsLabel
+            // 
+            this.stopBitsLabel.AutoSize = true;
+            this.stopBitsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.stopBitsLabel.Location = new System.Drawing.Point(17, 150);
+            this.stopBitsLabel.Name = "stopBitsLabel";
+            this.stopBitsLabel.Size = new System.Drawing.Size(67, 16);
+            this.stopBitsLabel.TabIndex = 3;
+            this.stopBitsLabel.Text = "Стоп Бит";
+            // 
+            // closeCom
+            // 
+            this.closeCom.BackColor = System.Drawing.Color.DarkGray;
+            this.closeCom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.closeCom.FlatAppearance.BorderSize = 0;
+            this.closeCom.Location = new System.Drawing.Point(117, 283);
+            this.closeCom.Name = "closeCom";
+            this.closeCom.Size = new System.Drawing.Size(95, 38);
+            this.closeCom.TabIndex = 1;
+            this.closeCom.Text = "Закрыть Порт";
+            this.closeCom.UseVisualStyleBackColor = false;
+            this.closeCom.Click += new System.EventHandler(this.closeComButton_Click);
+            // 
+            // dataBitsLabel
+            // 
+            this.dataBitsLabel.AutoSize = true;
+            this.dataBitsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dataBitsLabel.Location = new System.Drawing.Point(17, 193);
+            this.dataBitsLabel.Name = "dataBitsLabel";
+            this.dataBitsLabel.Size = new System.Drawing.Size(82, 16);
+            this.dataBitsLabel.TabIndex = 4;
+            this.dataBitsLabel.Text = "Бит данных";
+            // 
+            // openCom
+            // 
+            this.openCom.BackColor = System.Drawing.Color.DarkGray;
+            this.openCom.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.openCom.FlatAppearance.BorderSize = 0;
+            this.openCom.Location = new System.Drawing.Point(17, 283);
+            this.openCom.Name = "openCom";
+            this.openCom.Size = new System.Drawing.Size(95, 38);
+            this.openCom.TabIndex = 0;
+            this.openCom.Text = "Открыть Порт";
+            this.openCom.UseVisualStyleBackColor = false;
+            this.openCom.Click += new System.EventHandler(this.openComButton_Click);
+            // 
+            // numbComPortComboBox
+            // 
+            this.numbComPortComboBox.FormattingEnabled = true;
+            this.numbComPortComboBox.Items.AddRange(new object[] {
+            "Com1",
+            "Com2",
+            "Com3",
+            "Com4",
+            "Com5",
+            "Com6",
+            "Com7",
+            "Com8",
+            "Com9"});
+            this.numbComPortComboBox.Location = new System.Drawing.Point(17, 39);
+            this.numbComPortComboBox.Name = "numbComPortComboBox";
+            this.numbComPortComboBox.Size = new System.Drawing.Size(195, 21);
+            this.numbComPortComboBox.TabIndex = 5;
+            // 
+            // baudRateComboBox
+            // 
+            this.baudRateComboBox.FormattingEnabled = true;
+            this.baudRateComboBox.Items.AddRange(new object[] {
+            "9600",
+            "19200",
+            "115200"});
+            this.baudRateComboBox.Location = new System.Drawing.Point(17, 82);
+            this.baudRateComboBox.Name = "baudRateComboBox";
+            this.baudRateComboBox.Size = new System.Drawing.Size(195, 21);
+            this.baudRateComboBox.TabIndex = 6;
+            // 
+            // parityComboBox
+            // 
+            this.parityComboBox.FormattingEnabled = true;
+            this.parityComboBox.Items.AddRange(new object[] {
+            "None",
+            "Odd",
+            "Even"});
+            this.parityComboBox.Location = new System.Drawing.Point(17, 126);
+            this.parityComboBox.Name = "parityComboBox";
+            this.parityComboBox.Size = new System.Drawing.Size(195, 21);
+            this.parityComboBox.TabIndex = 7;
+            // 
+            // stopBitsComboBox
+            // 
+            this.stopBitsComboBox.FormattingEnabled = true;
+            this.stopBitsComboBox.Items.AddRange(new object[] {
+            "1",
+            "2"});
+            this.stopBitsComboBox.Location = new System.Drawing.Point(17, 169);
+            this.stopBitsComboBox.Name = "stopBitsComboBox";
+            this.stopBitsComboBox.Size = new System.Drawing.Size(195, 21);
+            this.stopBitsComboBox.TabIndex = 8;
+            // 
+            // dataBitsComboBox
+            // 
+            this.dataBitsComboBox.FormattingEnabled = true;
+            this.dataBitsComboBox.Items.AddRange(new object[] {
+            "7",
+            "8"});
+            this.dataBitsComboBox.Location = new System.Drawing.Point(17, 212);
+            this.dataBitsComboBox.Name = "dataBitsComboBox";
+            this.dataBitsComboBox.Size = new System.Drawing.Size(195, 21);
+            this.dataBitsComboBox.TabIndex = 9;
+            // 
+            // applyButton
+            // 
+            this.applyButton.BackColor = System.Drawing.Color.DarkGray;
+            this.applyButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.applyButton.FlatAppearance.BorderSize = 0;
+            this.applyButton.Location = new System.Drawing.Point(56, 239);
+            this.applyButton.Name = "applyButton";
+            this.applyButton.Size = new System.Drawing.Size(114, 38);
+            this.applyButton.TabIndex = 2;
+            this.applyButton.Text = "Применить";
+            this.applyButton.UseVisualStyleBackColor = false;
+            this.applyButton.Click += new System.EventHandler(this.applyButton_Click);
+            // 
+            // responseTextBox
+            // 
+            this.responseTextBox.AllowDrop = true;
+            this.responseTextBox.BackColor = System.Drawing.SystemColors.Window;
+            this.responseTextBox.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.responseTextBox.Location = new System.Drawing.Point(16, 12);
+            this.responseTextBox.Multiline = true;
+            this.responseTextBox.Name = "responseTextBox";
+            this.responseTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.responseTextBox.Size = new System.Drawing.Size(748, 445);
+            this.responseTextBox.TabIndex = 0;
+            // 
+            // sendButton
+            // 
+            this.sendButton.BackColor = System.Drawing.Color.DarkGray;
+            this.sendButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.sendButton.FlatAppearance.BorderSize = 0;
+            this.sendButton.Location = new System.Drawing.Point(653, 463);
+            this.sendButton.Name = "sendButton";
+            this.sendButton.Size = new System.Drawing.Size(111, 38);
+            this.sendButton.TabIndex = 3;
+            this.sendButton.Text = "Отправить в Порт";
+            this.sendButton.UseVisualStyleBackColor = false;
+            this.sendButton.Click += new System.EventHandler(this.sendButton_Click);
+            // 
+            // requestTextBox
+            // 
+            this.requestTextBox.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.requestTextBox.Location = new System.Drawing.Point(16, 463);
+            this.requestTextBox.Multiline = true;
+            this.requestTextBox.Name = "requestTextBox";
+            this.requestTextBox.Size = new System.Drawing.Size(614, 38);
+            this.requestTextBox.TabIndex = 5;
+            this.requestTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.requestTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RequestTextBox_KeyPress);
+            // 
+            // readProgressBar
+            // 
+            this.readProgressBar.Location = new System.Drawing.Point(143, 179);
+            this.readProgressBar.Name = "readProgressBar";
+            this.readProgressBar.Size = new System.Drawing.Size(487, 23);
+            this.readProgressBar.TabIndex = 6;
+            // 
+            // serialPortCommunicationAndOptionsSplitContainer
+            // 
+            this.serialPortCommunicationAndOptionsSplitContainer.Location = new System.Drawing.Point(273, 29);
+            this.serialPortCommunicationAndOptionsSplitContainer.Name = "serialPortCommunicationAndOptionsSplitContainer";
+            // 
+            // serialPortCommunicationAndOptionsSplitContainer.Panel1
+            // 
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.BackColor = System.Drawing.Color.Silver;
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.Controls.Add(this.readProgressBar);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.Controls.Add(this.requestTextBox);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.Controls.Add(this.sendButton);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.Controls.Add(this.responseTextBox);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            // 
+            // serialPortCommunicationAndOptionsSplitContainer.Panel2
+            // 
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.BackColor = System.Drawing.Color.Silver;
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.applyButton);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.dataBitsComboBox);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.stopBitsComboBox);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.parityComboBox);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.baudRateComboBox);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.numbComPortComboBox);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.openCom);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.dataBitsLabel);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.closeCom);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.stopBitsLabel);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.parityLabel);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.baudRateLabel);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Controls.Add(this.portLabel);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.ForeColor = System.Drawing.Color.Black;
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Margin = new System.Windows.Forms.Padding(3);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.Padding = new System.Windows.Forms.Padding(3);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.serialPortCommunicationAndOptionsSplitContainer.Size = new System.Drawing.Size(1033, 515);
+            this.serialPortCommunicationAndOptionsSplitContainer.SplitterDistance = 794;
+            this.serialPortCommunicationAndOptionsSplitContainer.TabIndex = 3;
+            // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1323, 625);
+            this.ClientSize = new System.Drawing.Size(1306, 557);
             this.Controls.Add(this.inputTableLabel);
             this.Controls.Add(this.inputTypePanel);
             this.Controls.Add(this.serialPortCommunicationLabel);
             this.Controls.Add(this.optionsLabel);
-            this.Controls.Add(this.serialPortCommunicationAndOptionsSplitContainer);
             this.Controls.Add(this.buttonsAndDataTypePanel);
+            this.Controls.Add(this.serialPortCommunicationAndOptionsSplitContainer);
             this.DataBindings.Add(new System.Windows.Forms.Binding("StartPosition", global::readEXEfile.Properties.Settings.Default, "center", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.Location = new System.Drawing.Point(100, 100);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1920, 1080);
+            this.MinimumSize = new System.Drawing.Size(1024, 500);
             this.Name = "Form1";
             this.StartPosition = global::readEXEfile.Properties.Settings.Default.center;
             this.Text = "VRFHost (Факом технолоджиз)";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResizeBegin += new System.EventHandler(this.Form1_resizeBegin);
+            this.ResizeEnd += new System.EventHandler(this.Form1_ResizeEnd);
             this.buttonsAndDataTypePanel.ResumeLayout(false);
             this.buttonsAndDataTypePanel.PerformLayout();
             this.dataTypePanel.ResumeLayout(false);
             this.dataTypePanel.PerformLayout();
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.ResumeLayout(false);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.PerformLayout();
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.ResumeLayout(false);
-            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.serialPortCommunicationAndOptionsSplitContainer)).EndInit();
-            this.serialPortCommunicationAndOptionsSplitContainer.ResumeLayout(false);
             this.inputTypePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.calibrationTableDataGridView)).EndInit();
             this.numberOfTankPanel.ResumeLayout(false);
@@ -790,33 +793,21 @@
             this.unitsOfLengthPanel.PerformLayout();
             this.unitsOfVolumePanel.ResumeLayout(false);
             this.unitsOfVolumePanel.PerformLayout();
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.ResumeLayout(false);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel1.PerformLayout();
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.ResumeLayout(false);
+            this.serialPortCommunicationAndOptionsSplitContainer.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.serialPortCommunicationAndOptionsSplitContainer)).EndInit();
+            this.serialPortCommunicationAndOptionsSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button openCom;
-        private System.Windows.Forms.Button closeCom;
         private System.Windows.Forms.Panel buttonsAndDataTypePanel;
-        private System.Windows.Forms.SplitContainer serialPortCommunicationAndOptionsSplitContainer;
         private System.Windows.Forms.Label optionsLabel;
-        private System.Windows.Forms.Label portLabel;
-        private System.Windows.Forms.Label stopBitsLabel;
-        private System.Windows.Forms.Label parityLabel;
-        private System.Windows.Forms.Label baudRateLabel;
-        private System.Windows.Forms.Label dataBitsLabel;
-        private System.Windows.Forms.ComboBox numbComPortComboBox;
-        private System.Windows.Forms.ComboBox dataBitsComboBox;
-        private System.Windows.Forms.ComboBox stopBitsComboBox;
-        private System.Windows.Forms.ComboBox parityComboBox;
-        private System.Windows.Forms.ComboBox baudRateComboBox;
         private System.Windows.Forms.Label serialPortCommunicationLabel;
-        private System.Windows.Forms.TextBox responseTextBox;
-        private System.Windows.Forms.Button applyButton;
-        private System.Windows.Forms.Button sendButton;
-        private System.Windows.Forms.TextBox requestTextBox;
         private System.Windows.Forms.Button clearScrinButton;
         private System.Windows.Forms.Label dataTypeLabel;
         private System.Windows.Forms.Panel dataTypePanel;
@@ -848,10 +839,27 @@
         private System.Windows.Forms.Button writeTableInControllerButton;
         private System.Windows.Forms.Button openFilForWriteButton;
         private System.Windows.Forms.OpenFileDialog forWriteInControllerOpenFileDialog;
-        private System.Windows.Forms.ProgressBar readProgressBar;
         private System.Windows.Forms.OpenFileDialog forCreateTableOpenFileDialog;
         private System.Windows.Forms.Button saveTableButton;
         private System.Windows.Forms.SaveFileDialog saveTableFileDialog;
+        private System.Windows.Forms.Label portLabel;
+        private System.Windows.Forms.Label baudRateLabel;
+        private System.Windows.Forms.Label parityLabel;
+        private System.Windows.Forms.Label stopBitsLabel;
+        private System.Windows.Forms.Button closeCom;
+        private System.Windows.Forms.Label dataBitsLabel;
+        private System.Windows.Forms.Button openCom;
+        private System.Windows.Forms.ComboBox numbComPortComboBox;
+        private System.Windows.Forms.ComboBox baudRateComboBox;
+        private System.Windows.Forms.ComboBox parityComboBox;
+        private System.Windows.Forms.ComboBox stopBitsComboBox;
+        private System.Windows.Forms.ComboBox dataBitsComboBox;
+        private System.Windows.Forms.Button applyButton;
+        private System.Windows.Forms.TextBox responseTextBox;
+        private System.Windows.Forms.Button sendButton;
+        private System.Windows.Forms.TextBox requestTextBox;
+        private System.Windows.Forms.ProgressBar readProgressBar;
+        private System.Windows.Forms.SplitContainer serialPortCommunicationAndOptionsSplitContainer;
     }
 }
 

@@ -20,7 +20,7 @@ namespace readEXEfile
     {
 
         SerialPort _serialComport = new SerialPort();
-        private int prohibitionCycleRead = DISABLE;
+        private volatile int prohibitionCycleRead = DISABLE;
         private const int OK = 1;
         private const int ERROR = 0;
         private const int ENABLE = 1;
@@ -29,6 +29,10 @@ namespace readEXEfile
         private int kkk = 0;
         Thread threadForCycleRead;
         object locker = new object();
+        private int startHeigth = 0;
+        private int startWidth = 0;
+
+        Size resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size;
 
         struct TCT
         {
@@ -88,6 +92,7 @@ namespace readEXEfile
                     _serialComport.Open();
                     sendTextToResponseTextBox("Порт открыт:  "
                         + (_serialComport.PortName, _serialComport.BaudRate, _serialComport.DataBits, _serialComport.Parity, _serialComport.StopBits));
+
                     threadForCycleRead = new Thread(taskForCycleRead);
                     threadForCycleRead.IsBackground = true; // закроет поток при выходе из программы
                     threadForCycleRead.Start();
@@ -162,7 +167,10 @@ namespace readEXEfile
                 if (textDataTypeRadioButton.Checked == true)
                 {
                     prohibitionCycleRead = ENABLE;
-                    if (sendComText(requestTextBox.Text + "\r") == OK) readCom(Com.RequestResponse);
+                    if (sendComText(requestTextBox.Text + "\r") == OK)
+                    {
+                        readCom(Com.RequestResponse);
+                    }
                     prohibitionCycleRead = DISABLE;
                 }
                 else
@@ -238,7 +246,10 @@ namespace readEXEfile
         private void sizeButton_Click(object sender, EventArgs e)
         {
             prohibitionCycleRead = ENABLE;
-            if (sendComText("SIZE\r") == OK) readCom(Com.SizeResponse);
+            if (sendComText("SIZE\r") == OK)
+            {
+                readCom(Com.SizeResponse);
+            }
             prohibitionCycleRead = DISABLE;
         }
 
@@ -363,21 +374,19 @@ namespace readEXEfile
                 {
                     if(line != "")
                     {
+                        string trimedLine = trimSpaceAndTab(line);
                         calibrationTableDataGridView.Rows.Add();
-                        string[] str = line.Split();
-
+                        string[] variables = trimedLine.Split();
                         if (System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0] == '.')
                         {
-                            calibrationTableDataGridView.Rows[count].Cells[0].Value = float.Parse(str[0].Replace(",", "."));
-                            calibrationTableDataGridView.Rows[count].Cells[1].Value = float.Parse(str[1].Replace(",", "."));
+                            calibrationTableDataGridView.Rows[count].Cells[0].Value = float.Parse(variables[0].Replace(",", "."));
+                            calibrationTableDataGridView.Rows[count].Cells[1].Value = float.Parse(variables[1].Replace(",", "."));
                         }
                         else if (System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0] == ',')
                         {
-                            calibrationTableDataGridView.Rows[count].Cells[0].Value = float.Parse(str[0].Replace(".", ","));
-                            calibrationTableDataGridView.Rows[count].Cells[1].Value = float.Parse(str[1].Replace(".", ","));
+                            calibrationTableDataGridView.Rows[count].Cells[0].Value = float.Parse(variables[0].Replace(".", ","));
+                            calibrationTableDataGridView.Rows[count].Cells[1].Value = float.Parse(variables[1].Replace(".", ","));
                         }
-                        //calibrationTableDataGridView.Rows[count].Cells[0].Value = float.Parse(str[0]);
-                        //calibrationTableDataGridView.Rows[count].Cells[1].Value = float.Parse(str[1]);
                         count++;
                     }
                 }
@@ -532,21 +541,32 @@ namespace readEXEfile
             sendTextToCountOfStringsTextBox(countRecords.ToString());
         }
 
+        private string trimSpaceAndTab(string textString)
+        {
+            string str = textString.Replace("\t", " ");
+            while (str.Contains("  "))
+            {
+                str = str.Replace("  ", " ");
+            }
+
+            return str.Trim();
+        }
+
         private void clearRequestTextBox()
         {
             requestTextBox.Text = "";
         }
 
-        private void sendTextToResponseTextBox(string str)
+        private void sendTextToResponseTextBox(string text)
         {
             if (responseTextBox.InvokeRequired)
             {
                 StringArgReturningVoidDelegate d = new StringArgReturningVoidDelegate(sendTextToResponseTextBox);
-                Invoke(d, new object[] { str });
+                Invoke(d, new object[] { text });
             }
             else
             {
-                responseTextBox.AppendText(str);
+                responseTextBox.AppendText(text);
                 responseTextBox.AppendText(Environment.NewLine);
             }
         }
@@ -595,30 +615,38 @@ namespace readEXEfile
         {
             lock (locker)
             {
-                if (_serialComport.BytesToRead != 0)
+                try
                 {
-                    switch (com)
+                    if (_serialComport.BytesToRead != 0)
                     {
-                        case Com.CycleResponse:
-                            readComCycleResponse();
-                            break;
-                        case Com.ExeResponse:
-                            readComExeResponse();
-                            break;
-                        case Com.RequestResponse:
-                            readComResponse();
-                            break;
-                        case Com.SizeResponse:
-                            readComSizeResponse();
-                            break;
+                        switch (com)
+                        {
+                            case Com.CycleResponse:
+                                readComCycleResponse();
+                                break;
+                            case Com.ExeResponse:
+                                readComExeResponse();
+                                break;
+                            case Com.RequestResponse:
+                                readComResponse();
+                                break;
+                            case Com.SizeResponse:
+                                readComSizeResponse();
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (com)
+                        {
+                            case Com.CycleResponse: break;
+                            default: sendTextToResponseTextBox("Ответа нет! Проверте связь"); break;
+                        }
                     }
                 }
-                else
+                catch
                 {
-                    if (prohibitionCycleRead != DISABLE)
-                    {
-                        sendTextToResponseTextBox("Ответа нет! Проверте связь");
-                    }
+                    this.Close(); //закрывает программу
                 }
             }
         }
@@ -650,6 +678,7 @@ namespace readEXEfile
                 response = _serialComport.ReadExisting();
                 sendTextToResponseTextBox(response);
             }
+            _serialComport.DiscardInBuffer();
         }
 
         private void readComSizeResponse()
@@ -676,6 +705,7 @@ namespace readEXEfile
             {
                 sendTextToResponseTextBox("Размер буфера для записи не определен");
             }
+            _serialComport.DiscardInBuffer();
         }
 
         private void readComExeResponse()
@@ -688,8 +718,8 @@ namespace readEXEfile
             {
                 if (prohibitionCycleRead == DISABLE)
                 {
-                    string str = _serialComport.ReadExisting();
-                    sendTextToResponseTextBox(str);
+                    string stringFromCom = _serialComport.ReadExisting();
+                    sendTextToResponseTextBox(stringFromCom);
                 }
             }
         }
@@ -699,7 +729,7 @@ namespace readEXEfile
             while (true)
             {
                 readCom(Com.CycleResponse);
-                Thread.Sleep(500);
+                Thread.Sleep(100);
             }
         }
 
@@ -786,6 +816,107 @@ namespace readEXEfile
         private void clearCalibrationTable()
         {
             calibrationTableDataGridView.Rows.Clear();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            resolution.Height -= 50;
+            int widthForm = this.Width;
+            int heightForm = this.Height - 5;
+            int widthSpliterDistance = serialPortCommunicationAndOptionsSplitContainer.Width - serialPortCommunicationAndOptionsSplitContainer.SplitterDistance;
+            int upSize;
+            int downSize;
+            //this.WindowState = FormWindowState.Maximized;
+            
+            if (resolution.Width <= 1024)
+            {
+                resolution.Width = 1024;
+                responseTextBox.Font = new System.Drawing.Font(responseTextBox.Font.FontFamily, 8);
+                requestTextBox.Font = new System.Drawing.Font(requestTextBox.Font.FontFamily, 9);
+            }
+
+            if (resolution.Width > widthForm)
+            {
+                upSize = resolution.Width - widthForm;
+                this.Width = resolution.Width;
+                this.Height = resolution.Height;
+                this.serialPortCommunicationAndOptionsSplitContainer.Width += upSize;
+                this.serialPortCommunicationAndOptionsSplitContainer.SplitterDistance = this.serialPortCommunicationAndOptionsSplitContainer.Width - widthSpliterDistance;
+                this.optionsLabel.Left += upSize;
+                this.responseTextBox.Width += upSize;
+                this.sendButton.Left += upSize;
+                this.requestTextBox.Width += upSize;
+                this.readProgressBar.Width += upSize;
+            }
+            else
+            {
+                downSize = widthForm - resolution.Width;
+                this.Width = resolution.Width;
+                this.Height = resolution.Height;
+                this.serialPortCommunicationAndOptionsSplitContainer.Width -= downSize;
+                this.serialPortCommunicationAndOptionsSplitContainer.SplitterDistance = this.serialPortCommunicationAndOptionsSplitContainer.Width - widthSpliterDistance;
+                this.optionsLabel.Left -= downSize;
+                this.responseTextBox.Width -= downSize;
+                this.sendButton.Left -= downSize;
+                this.requestTextBox.Width -= downSize;
+                this.readProgressBar.Width -= downSize;
+            }
+            if (resolution.Height > heightForm)
+            {
+                upSize = resolution.Height - heightForm;
+                this.serialPortCommunicationAndOptionsSplitContainer.Height += upSize;
+                this.sendButton.Top += upSize;
+                this.requestTextBox.Top += upSize;
+                this.responseTextBox.Height += upSize;
+                this.inputTypePanel.Height += upSize;
+                this.writeTableInControllerButton.Top += upSize;
+                this.openFilForWriteButton.Top += upSize;
+                this.saveTableButton.Top += upSize;
+                this.calibrationTableDataGridView.Height += upSize;
+            }
+            else
+            {
+                downSize = heightForm - resolution.Height;
+                this.serialPortCommunicationAndOptionsSplitContainer.Height -= downSize;
+                this.sendButton.Top -= downSize;
+                this.requestTextBox.Top -= downSize;
+                this.responseTextBox.Height -= downSize;
+                this.inputTypePanel.Height -= downSize;
+                this.writeTableInControllerButton.Top -= downSize;
+                this.openFilForWriteButton.Top -= downSize;
+                this.saveTableButton.Top -= downSize;
+                this.calibrationTableDataGridView.Height -= downSize;
+            }
+        }
+
+        private void Form1_resizeBegin(object sender, EventArgs e)
+        {
+            startHeigth = this.Height;
+            startWidth = this.Width;
+        }
+
+        private void Form1_ResizeEnd(object sender, EventArgs e)
+        {
+            int resizeHeight = startHeigth - this.Height;
+            this.inputTypePanel.Height -= resizeHeight;
+            this.calibrationTableDataGridView.Height -= resizeHeight;
+            this.serialPortCommunicationAndOptionsSplitContainer.Height -= resizeHeight;
+            this.responseTextBox.Height -= resizeHeight;
+            this.openFilForWriteButton.Top -= resizeHeight;
+            this.saveTableButton.Top -= resizeHeight;
+            this.writeTableInControllerButton.Top -= resizeHeight;
+            this.requestTextBox.Top -= resizeHeight;
+            this.sendButton.Top -= resizeHeight;
+
+            int widthSpliterDistance = serialPortCommunicationAndOptionsSplitContainer.Width - serialPortCommunicationAndOptionsSplitContainer.SplitterDistance;
+            int resizeWidth = startWidth - this.Width;
+            this.requestTextBox.Width -= resizeWidth;
+            this.responseTextBox.Width -= resizeWidth;
+            this.readProgressBar.Width -= resizeWidth;
+            this.sendButton.Left -= resizeWidth;
+            this.serialPortCommunicationAndOptionsSplitContainer.Width -= resizeWidth;
+            this.serialPortCommunicationAndOptionsSplitContainer.SplitterDistance = this.serialPortCommunicationAndOptionsSplitContainer.Width - widthSpliterDistance;
+            this.optionsLabel.Left -= resizeWidth;
         }
     }
 }

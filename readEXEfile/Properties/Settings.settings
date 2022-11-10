@@ -15,7 +15,7 @@
       <Value Profile="(Default)">100, 100</Value>
     </Setting>
     <Setting Name="center" Type="System.Windows.Forms.FormStartPosition" Scope="User">
-      <Value Profile="(Default)">CenterScreen</Value>
+      <Value Profile="(Default)">Manual</Value>
     </Setting>
   </Settings>
 </SettingsFile>
