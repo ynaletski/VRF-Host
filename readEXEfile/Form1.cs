@@ -18,7 +18,6 @@ namespace readEXEfile
 {
     public partial class Form1 : Form
     {
-
         SerialPort _serialComport = new SerialPort();
         private volatile int prohibitionCycleRead = DISABLE;
         private const int OK = 1;
@@ -31,22 +30,15 @@ namespace readEXEfile
         object locker = new object();
         private int startHeigth = 0;
         private int startWidth = 0;
-
         Size resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Size;
-
+        private ushort countRecords = 0;
+        delegate void StringArgReturningVoidDelegate(string str);
+        private string fileForWriteInController = "";
         struct TCT
         {
             public float level;
             public float volume;
         };
-
-        private ushort countRecords = 0;
-
-        // для доступа из разных потоков
-        delegate void StringArgReturningVoidDelegate(string str);
-
-        private string fileForWriteInController = "";
-
         enum Com
         {
             CycleResponse,
@@ -86,26 +78,22 @@ namespace readEXEfile
         {
             if (!_serialComport.IsOpen)
             {
-
                 try
                 {
                     _serialComport.Open();
-                    sendTextToResponseTextBox("Порт открыт:  "
-                        + (_serialComport.PortName, _serialComport.BaudRate, _serialComport.DataBits, _serialComport.Parity, _serialComport.StopBits));
-
+                    sendTextToResponseTextBox("Порт открыт:  " + (_serialComport.PortName, _serialComport.BaudRate, 
+                        _serialComport.DataBits, _serialComport.Parity, _serialComport.StopBits));
                     threadForCycleRead = new Thread(taskForCycleRead);
                     threadForCycleRead.IsBackground = true; // закроет поток при выходе из программы
                     threadForCycleRead.Start();
                 }
                 catch
                 {
-                    sendTextToResponseTextBox("Порт уже открыт или недоступен");
+                    sendTextToResponseTextBox("Порт недоступен.");
                 }
             }
-            else
-            {
-                sendTextToResponseTextBox("Порт уже открыт или недоступен!");
-            }
+            else sendTextToResponseTextBox("Порт уже открыт.");
+
 
         }
 
@@ -127,10 +115,7 @@ namespace readEXEfile
                 }
             }
             sendTextToResponseTextBox("Порт закрыт:  " + (_serialComport.PortName));
-            //this.Close(); //закрывает программу
         }
-
-
 
         private void applyButton_Click(object sender, EventArgs e)
         {
@@ -139,14 +124,14 @@ namespace readEXEfile
                 _serialComport.PortName = numbComPortComboBox.Text;
                 _serialComport.BaudRate = int.Parse(baudRateComboBox.Text);
                 _serialComport.Parity = (Parity)Enum.Parse(typeof(Parity), parityComboBox.Text);
-                _serialComport.StopBits = (StopBits)Enum.Parse(typeof(StopBits), stopBitsComboBox.Text);
+                _serialComport.StopBits = (StopBits)Enum.Parse(typeof(StopBits), stopBitsComboBox.Text);          
                 _serialComport.DataBits = int.Parse(dataBitsComboBox.Text);
                 _serialComport.Handshake = Handshake.None;
                 _serialComport.ReadTimeout = 2000;
                 _serialComport.WriteTimeout = 2000;
-                sendTextToResponseTextBox("Настрорйки Последовательного порта: "
-                    + (_serialComport.PortName, _serialComport.BaudRate, _serialComport.DataBits, _serialComport.Parity, _serialComport.StopBits));
-
+                sendTextToResponseTextBox("Настрорйки Последовательного порта: " + (_serialComport.PortName, 
+                    _serialComport.BaudRate, _serialComport.DataBits, _serialComport.Parity, 
+                        _serialComport.StopBits));
             }
             catch
             {
@@ -167,16 +152,10 @@ namespace readEXEfile
                 if (textDataTypeRadioButton.Checked == true)
                 {
                     prohibitionCycleRead = ENABLE;
-                    if (sendComText(requestTextBox.Text + "\r") == OK)
-                    {
-                        readCom(Com.RequestResponse);
-                    }
+                    if (sendComText(requestTextBox.Text + "\r") == OK) readCom(Com.RequestResponse);
                     prohibitionCycleRead = DISABLE;
                 }
-                else
-                {
-                    sendTextToResponseTextBox("Hex");
-                }
+                else sendTextToResponseTextBox("Hex");
             }
             catch
             {
@@ -187,10 +166,7 @@ namespace readEXEfile
 
         private void readComButton_Click(object sender, EventArgs e)
         {
-            if (!_serialComport.IsOpen)
-            {
-                sendTextToResponseTextBox("Откройте последовательный порт!");
-            }
+            if (!_serialComport.IsOpen) sendTextToResponseTextBox("Откройте последовательный порт!");
             else
             {
                 if (nm_buff.Length == 1)
@@ -246,10 +222,7 @@ namespace readEXEfile
         private void sizeButton_Click(object sender, EventArgs e)
         {
             prohibitionCycleRead = ENABLE;
-            if (sendComText("SIZE\r") == OK)
-            {
-                readCom(Com.SizeResponse);
-            }
+            if (sendComText("SIZE\r") == OK) readCom(Com.SizeResponse);
             prohibitionCycleRead = DISABLE;
         }
 
@@ -277,8 +250,8 @@ namespace readEXEfile
                         }
                         catch
                         {
-                            sendTextToResponseTextBox("Создайте папки d:\\!\\2, либо в строке выше укажите путь для сожранения и " +
-                                "название файла с расширением .ЕХЕ и нажмите 'Сханить файл'");
+                            sendTextToResponseTextBox("Создайте папки d:\\!\\2, либо в строке выше укажите путь " +
+                                "для сожранения и название файла с расширением .ЕХЕ и нажмите 'Сханить файл'");
                         }
                     }
                     else
@@ -302,11 +275,9 @@ namespace readEXEfile
         {
             //string path = @"T66_1.tcb";
             string path = @fileForWriteInController;
-
             try
             {
                 byte[] readBytes = File.ReadAllBytes(path);
-
                 if (System.Text.Encoding.ASCII.GetString(readBytes, 0, 2) == "TC")
                 {
                     int i = (readBytes[4] & 0xff) | ((readBytes[5] << 8) & 0xff00);
@@ -346,17 +317,9 @@ namespace readEXEfile
             saveTableFileDialog.Title = "Сохранить таблицу *.tcb";
             if (saveTableFileDialog.ShowDialog() == DialogResult.Cancel) return;
             string fileName = saveTableFileDialog.FileName;
-
-            if (saveTableInFile(fileName) == OK)
-            {
-                sendTextToResponseTextBox("Файл " + fileName + " сохранен.");
-            }
-            else    //error
-            {
-                sendTextToResponseTextBox("Не верные данные в таблице!");
-            }
+            if (saveTableInFile(fileName) == OK) sendTextToResponseTextBox("Файл " + fileName + " сохранен.");
+            else sendTextToResponseTextBox("Не верные данные в таблице!");
         }
-
 
         private void tableFromFileButton_Click(object sender, EventArgs e)
         {
@@ -372,20 +335,27 @@ namespace readEXEfile
                 clearCalibrationTable();
                 foreach (string line in System.IO.File.ReadLines(fileName))
                 {
-                    if(line != "")
+                    if(trimSpaceAndTab(line) != "")
                     {
                         string trimedLine = trimSpaceAndTab(line);
+                        Console.WriteLine("! " + trimedLine + " !");
                         calibrationTableDataGridView.Rows.Add();
                         string[] variables = trimedLine.Split();
-                        if (System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0] == '.')
+                        if (System.Globalization.CultureInfo.CurrentCulture.
+                                    NumberFormat.NumberDecimalSeparator[0] == '.')
                         {
-                            calibrationTableDataGridView.Rows[count].Cells[0].Value = float.Parse(variables[0].Replace(",", "."));
-                            calibrationTableDataGridView.Rows[count].Cells[1].Value = float.Parse(variables[1].Replace(",", "."));
+                            calibrationTableDataGridView.Rows[count].Cells[0].Value = 
+                                                                       float.Parse(variables[0].Replace(",", "."));
+                            calibrationTableDataGridView.Rows[count].Cells[1].Value = 
+                                                                        float.Parse(variables[1].Replace(",", "."));
                         }
-                        else if (System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0] == ',')
+                        else if (System.Globalization.CultureInfo.CurrentCulture.
+                                        NumberFormat.NumberDecimalSeparator[0] == ',')
                         {
-                            calibrationTableDataGridView.Rows[count].Cells[0].Value = float.Parse(variables[0].Replace(".", ","));
-                            calibrationTableDataGridView.Rows[count].Cells[1].Value = float.Parse(variables[1].Replace(".", ","));
+                            calibrationTableDataGridView.Rows[count].Cells[0].Value = 
+                                                                       float.Parse(variables[0].Replace(".", ","));
+                            calibrationTableDataGridView.Rows[count].Cells[1].Value = 
+                                                                       float.Parse(variables[1].Replace(".", ","));
                         }
                         count++;
                     }
@@ -420,7 +390,8 @@ namespace readEXEfile
                     {
                         try
                         {
-                            calibrationTableDataGridView.Rows[i].Cells[0].Value = float.Parse(calibrationTableDataGridView.Rows[i].Cells[0].Value.ToString()) / 10;
+                            calibrationTableDataGridView.Rows[i].Cells[0].Value = 
+                                  float.Parse(calibrationTableDataGridView.Rows[i].Cells[0].Value.ToString()) / 10;
                         }
                         catch
                         {
@@ -442,7 +413,8 @@ namespace readEXEfile
                     {
                         try
                         {
-                            calibrationTableDataGridView.Rows[i].Cells[0].Value = float.Parse(calibrationTableDataGridView.Rows[i].Cells[0].Value.ToString()) * 10;
+                            calibrationTableDataGridView.Rows[i].Cells[0].Value = 
+                                  float.Parse(calibrationTableDataGridView.Rows[i].Cells[0].Value.ToString()) * 10;
                         }
                         catch
                         {
@@ -463,7 +435,8 @@ namespace readEXEfile
                     {
                         try
                         {
-                            calibrationTableDataGridView.Rows[i].Cells[1].Value = float.Parse(calibrationTableDataGridView.Rows[i].Cells[1].Value.ToString()) / 1000;
+                            calibrationTableDataGridView.Rows[i].Cells[1].Value = 
+                                float.Parse(calibrationTableDataGridView.Rows[i].Cells[1].Value.ToString()) / 1000;
                         }
                         catch
                         {
@@ -484,7 +457,8 @@ namespace readEXEfile
                     {
                         try
                         {
-                            calibrationTableDataGridView.Rows[i].Cells[1].Value = float.Parse(calibrationTableDataGridView.Rows[i].Cells[1].Value.ToString()) * 1000;
+                            calibrationTableDataGridView.Rows[i].Cells[1].Value = 
+                                float.Parse(calibrationTableDataGridView.Rows[i].Cells[1].Value.ToString()) * 1000;
                         }
                         catch
                         {
@@ -495,7 +469,8 @@ namespace readEXEfile
             }
         }
 
-        private void CalibrationTableDataGridView_EditControlShowing(object Sender, DataGridViewEditingControlShowingEventArgs e)
+        private void CalibrationTableDataGridView_EditControlShowing(object Sender, 
+                                            DataGridViewEditingControlShowingEventArgs e)
         {
             if (calibrationTableDataGridView.CurrentCell.ColumnIndex == 0 |
                     calibrationTableDataGridView.CurrentCell.ColumnIndex == 1)
@@ -548,7 +523,6 @@ namespace readEXEfile
             {
                 str = str.Replace("  ", " ");
             }
-
             return str.Trim();
         }
 
@@ -575,7 +549,8 @@ namespace readEXEfile
         {
             if (countOfStringsTextBox.InvokeRequired)
             {
-                StringArgReturningVoidDelegate d = new StringArgReturningVoidDelegate(sendTextToCountOfStringsTextBox);
+                StringArgReturningVoidDelegate d = new StringArgReturningVoidDelegate(
+                                                                            sendTextToCountOfStringsTextBox);
                 Invoke(d, new object[] { str });
             }
             else
@@ -586,14 +561,8 @@ namespace readEXEfile
 
         private void sendComByte(byte[] bytes, int offset, int count)
         {
-            if (!_serialComport.IsOpen)
-            {
-                sendTextToResponseTextBox("Откройте последовательный порт!");
-            }
-            else
-            {
-                _serialComport.Write(bytes, offset, count);
-            }
+            if (!_serialComport.IsOpen) sendTextToResponseTextBox("Откройте последовательный порт!");
+            else _serialComport.Write(bytes, offset, count);
         }
 
         private int sendComText(string str)
@@ -686,14 +655,10 @@ namespace readEXEfile
             string response;
             string str = "";
             response = _serialComport.ReadExisting();
-
             sendTextToResponseTextBox(response);
             foreach (char ch in response)
             {
-                if (char.IsDigit(ch))
-                {
-                    str += ch;
-                }
+                if (char.IsDigit(ch)) str += ch;
             }
             try
             {
@@ -708,9 +673,7 @@ namespace readEXEfile
             _serialComport.DiscardInBuffer();
         }
 
-        private void readComExeResponse()
-        {
-        }
+        private void readComExeResponse(){}
 
         private void readComCycleResponse()
         {
@@ -787,22 +750,18 @@ namespace readEXEfile
                 {
                     if (smUnitsOfLengthRadioButton.Checked)
                     {
-                        calibrationTableDataGridView.Rows[i].Cells[0].Value = float.Parse(calibrationTableDataGridView.Rows[i].Cells[0].Value.ToString()) * 10;
+                        calibrationTableDataGridView.Rows[i].Cells[0].Value = 
+                                  float.Parse(calibrationTableDataGridView.Rows[i].Cells[0].Value.ToString()) * 10;
                         mmUnitsOfLengthRadioButton.Select();
                     }
-                    else
-                    {
-                        float.Parse(calibrationTableDataGridView.Rows[i].Cells[0].Value.ToString());
-                    }
+                    else float.Parse(calibrationTableDataGridView.Rows[i].Cells[0].Value.ToString());
                     if (m3UnitsOfVolumeRadioButton.Checked)
                     {
-                        calibrationTableDataGridView.Rows[i].Cells[1].Value = float.Parse(calibrationTableDataGridView.Rows[i].Cells[1].Value.ToString()) / 1000;
+                        calibrationTableDataGridView.Rows[i].Cells[1].Value = 
+                                float.Parse(calibrationTableDataGridView.Rows[i].Cells[1].Value.ToString()) / 1000;
                         lUnitsOfVolumeRadioButton.Select();
                     }
-                    else
-                    {
-                        float.Parse(calibrationTableDataGridView.Rows[i].Cells[1].Value.ToString());
-                    }
+                    else float.Parse(calibrationTableDataGridView.Rows[i].Cells[1].Value.ToString());
                 }
                 catch
                 {
@@ -813,6 +772,7 @@ namespace readEXEfile
             return OK;
         }
         
+
         private void clearCalibrationTable()
         {
             calibrationTableDataGridView.Rows.Clear();
@@ -823,26 +783,39 @@ namespace readEXEfile
             resolution.Height -= 50;
             int widthForm = this.Width;
             int heightForm = this.Height - 5;
-            int widthSpliterDistance = serialPortCommunicationAndOptionsSplitContainer.Width - serialPortCommunicationAndOptionsSplitContainer.SplitterDistance;
+            int widthSpliterDistance = serialPortCommunicationAndOptionsSplitContainer.Width - 
+                                                  serialPortCommunicationAndOptionsSplitContainer.SplitterDistance;
+            Graphics graphics = this.CreateGraphics();
             int upSize;
             int downSize;
             //this.WindowState = FormWindowState.Maximized;
-            
             if (resolution.Width <= 1024)
             {
                 resolution.Width = 1024;
                 responseTextBox.Font = new System.Drawing.Font(responseTextBox.Font.FontFamily, 8);
                 requestTextBox.Font = new System.Drawing.Font(requestTextBox.Font.FontFamily, 9);
             }
-
-            if (resolution.Width > widthForm)
+            if (graphics.DpiX == 120)
+            {
+                this.Height = resolution.Height;
+                this.Width = 1270;
+                this.optionsLabel.Left = 1005;
+                this.serialPortCommunicationAndOptionsSplitContainer.Width = 970;
+                this.serialPortCommunicationAndOptionsSplitContainer.SplitterDistance = 675;
+                this.responseTextBox.Width = 610;
+                this.sendButton.Left = 510;
+                this.requestTextBox.Width = 470;
+                this.readProgressBar.Width = 320;
+            }
+            else if (resolution.Width > widthForm)
             {
                 upSize = resolution.Width - widthForm;
                 this.Width = resolution.Width;
                 this.Height = resolution.Height;
-                this.serialPortCommunicationAndOptionsSplitContainer.Width += upSize;
-                this.serialPortCommunicationAndOptionsSplitContainer.SplitterDistance = this.serialPortCommunicationAndOptionsSplitContainer.Width - widthSpliterDistance;
                 this.optionsLabel.Left += upSize;
+                this.serialPortCommunicationAndOptionsSplitContainer.Width += upSize;
+                this.serialPortCommunicationAndOptionsSplitContainer.SplitterDistance = 
+                                 this.serialPortCommunicationAndOptionsSplitContainer.Width - widthSpliterDistance;
                 this.responseTextBox.Width += upSize;
                 this.sendButton.Left += upSize;
                 this.requestTextBox.Width += upSize;
@@ -853,9 +826,10 @@ namespace readEXEfile
                 downSize = widthForm - resolution.Width;
                 this.Width = resolution.Width;
                 this.Height = resolution.Height;
-                this.serialPortCommunicationAndOptionsSplitContainer.Width -= downSize;
-                this.serialPortCommunicationAndOptionsSplitContainer.SplitterDistance = this.serialPortCommunicationAndOptionsSplitContainer.Width - widthSpliterDistance;
                 this.optionsLabel.Left -= downSize;
+                this.serialPortCommunicationAndOptionsSplitContainer.Width -= downSize;
+                this.serialPortCommunicationAndOptionsSplitContainer.SplitterDistance = 
+                                 this.serialPortCommunicationAndOptionsSplitContainer.Width - widthSpliterDistance;
                 this.responseTextBox.Width -= downSize;
                 this.sendButton.Left -= downSize;
                 this.requestTextBox.Width -= downSize;
@@ -907,15 +881,16 @@ namespace readEXEfile
             this.writeTableInControllerButton.Top -= resizeHeight;
             this.requestTextBox.Top -= resizeHeight;
             this.sendButton.Top -= resizeHeight;
-
-            int widthSpliterDistance = serialPortCommunicationAndOptionsSplitContainer.Width - serialPortCommunicationAndOptionsSplitContainer.SplitterDistance;
+            int widthSpliterDistance = serialPortCommunicationAndOptionsSplitContainer.Width - 
+                                                  serialPortCommunicationAndOptionsSplitContainer.SplitterDistance;
             int resizeWidth = startWidth - this.Width;
             this.requestTextBox.Width -= resizeWidth;
             this.responseTextBox.Width -= resizeWidth;
             this.readProgressBar.Width -= resizeWidth;
             this.sendButton.Left -= resizeWidth;
             this.serialPortCommunicationAndOptionsSplitContainer.Width -= resizeWidth;
-            this.serialPortCommunicationAndOptionsSplitContainer.SplitterDistance = this.serialPortCommunicationAndOptionsSplitContainer.Width - widthSpliterDistance;
+            this.serialPortCommunicationAndOptionsSplitContainer.SplitterDistance = 
+                                 this.serialPortCommunicationAndOptionsSplitContainer.Width - widthSpliterDistance;
             this.optionsLabel.Left -= resizeWidth;
         }
     }

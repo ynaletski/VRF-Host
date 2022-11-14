@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonsAndDataTypePanel = new System.Windows.Forms.Panel();
             this.sizeButton = new System.Windows.Forms.Button();
             this.exeSaveButton = new System.Windows.Forms.Button();
@@ -107,7 +107,7 @@
             this.buttonsAndDataTypePanel.Controls.Add(this.dataTypeLabel);
             this.buttonsAndDataTypePanel.Controls.Add(this.clearScrinButton);
             this.buttonsAndDataTypePanel.Controls.Add(this.dataTypePanel);
-            this.buttonsAndDataTypePanel.Location = new System.Drawing.Point(273, 12);
+            this.buttonsAndDataTypePanel.Location = new System.Drawing.Point(2, 2);
             this.buttonsAndDataTypePanel.Name = "buttonsAndDataTypePanel";
             this.buttonsAndDataTypePanel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.buttonsAndDataTypePanel.Size = new System.Drawing.Size(1033, 63);
@@ -218,7 +218,7 @@
             // 
             // optionsLabel
             // 
-            this.optionsLabel.AutoSize = true;
+            this.optionsLabel.AllowDrop = true;
             this.optionsLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.optionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.optionsLabel.ForeColor = System.Drawing.Color.Black;
@@ -266,7 +266,7 @@
             this.saveTableButton.Name = "saveTableButton";
             this.saveTableButton.Size = new System.Drawing.Size(131, 38);
             this.saveTableButton.TabIndex = 28;
-            this.saveTableButton.Text = "Сохранить файл *.tcb";
+            this.saveTableButton.Text = "Сформировать файл *.tcb";
             this.saveTableButton.UseVisualStyleBackColor = false;
             this.saveTableButton.Click += new System.EventHandler(this.saveTableButton_Click);
             // 
@@ -300,8 +300,8 @@
             // 
             // length
             // 
-            dataGridViewCellStyle1.NullValue = null;
-            this.length.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.NullValue = null;
+            this.length.DefaultCellStyle = dataGridViewCellStyle6;
             this.length.HeaderText = "Уровень";
             this.length.Name = "length";
             // 
@@ -708,7 +708,6 @@
             this.requestTextBox.Name = "requestTextBox";
             this.requestTextBox.Size = new System.Drawing.Size(614, 38);
             this.requestTextBox.TabIndex = 5;
-            this.requestTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.requestTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RequestTextBox_KeyPress);
             // 
             // readProgressBar
